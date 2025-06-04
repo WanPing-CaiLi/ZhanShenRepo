@@ -18,6 +18,8 @@ public class BoFangQi : MonoBehaviour
     private float dashCooldownTimer;
 
     [Header("攻击信息")]
+    private float comboTimeWindow;
+    [SerializeField] private float comboTime = .3f;
     private bool isAttacking;
     private int comboCounter;
 
@@ -54,8 +56,9 @@ public class BoFangQi : MonoBehaviour
 
         dashTime -= Time.deltaTime;
         dashCooldownTimer -= Time.deltaTime;
+        comboTimeWindow -= Time.deltaTime;
 
-
+        
 
 
 
@@ -93,7 +96,16 @@ public class BoFangQi : MonoBehaviour
 
     public void AttackOver()
     {
+        
+
         isAttacking = false;
+
+        comboCounter++;
+
+        if (comboCounter > 2)
+            comboCounter = 0;
+
+       
     }
 
     private void YiDongFangfa()
@@ -114,7 +126,7 @@ public class BoFangQi : MonoBehaviour
 
         if(Input.GetKeyDown(KeyCode.J))
         {
-            isAttacking = true;
+            StarAttackevent();
         }
 
         if (Input.GetKeyDown(KeyCode.Space))        //控制主角跳跃
@@ -126,6 +138,15 @@ public class BoFangQi : MonoBehaviour
             DashAbility();
         }
     }    //4.检查按键输入
+
+    private void StarAttackevent()
+    {
+        if (comboTimeWindow < 0)
+            comboCounter = 0;
+
+        isAttacking = true;
+        comboTimeWindow = comboTime;
+    }
 
     private void DashAbility()
     {
