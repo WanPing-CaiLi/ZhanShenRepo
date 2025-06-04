@@ -110,7 +110,12 @@ public class BoFangQi : MonoBehaviour
 
     private void YiDongFangfa()
     {
-        if (dashTime > 0)
+        if(isAttacking)
+        {
+            ZhuJue.velocity = new Vector2(0, 0);
+        }
+
+        else if (dashTime > 0)
         {
             ZhuJue.velocity = new Vector2(YiDong * dashSpeed, 0);//³å´Ì
         }
@@ -150,7 +155,7 @@ public class BoFangQi : MonoBehaviour
 
     private void DashAbility()
     {
-        if (dashCooldownTimer < 0)
+        if (dashCooldownTimer < 0 && !isAttacking)
         {
             dashCooldownTimer = dashCooldown;
             dashTime = dashDuration;
