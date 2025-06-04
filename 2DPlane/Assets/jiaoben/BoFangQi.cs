@@ -117,7 +117,7 @@ public class BoFangQi : MonoBehaviour
 
         else if (dashTime > 0)
         {
-            ZhuJue.velocity = new Vector2(YiDong * dashSpeed, 0);//³å´Ì
+            ZhuJue.velocity = new Vector2(ChaoXiang * dashSpeed, 0);//³å´Ì
         }
         else
         {
@@ -146,6 +146,9 @@ public class BoFangQi : MonoBehaviour
 
     private void StarAttackevent()
     {
+        if (!ZSdiMian)
+            return;
+
         if (comboTimeWindow < 0)
             comboCounter = 0;
 
